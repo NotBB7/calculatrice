@@ -5,7 +5,7 @@ function appendToDisplay(value) {
 
 function clearDisplay() {
     // Efface le contenu de l'affichage
-    document.getElementById('display').value = '';
+    document.getElementById('display').value = '0';
 }
 
 function calculateResult() {
