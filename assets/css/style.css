@@ -2,10 +2,10 @@
     width: 250px;
     margin: 0 auto;
     text-align: center;
-    background-color: #0a423e;
+    background-color: #2c98e0;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(8, 170, 143, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 #display {
@@ -18,7 +18,7 @@
     box-sizing: border-box;
     border: none;
     border-radius: 3px;
-    background-color: #15d87d;
+    background-color: #ffffffad;
 }
 
 .keypad {
@@ -39,6 +39,14 @@
     transition: background-color 0.3s ease;
 }
 
+.keypad button:last-child {
+    grid-column: 1 / span 4;
+}
+
 .keypad button:hover {
     background-color: #ccc;
+}
+.calculator .keypad .valeur{
+    width: 100%;
+    background-color: green;
 }
