@@ -1,97 +1,95 @@
-function appendToDisplay(value) {
-    var display = document.getElementById('display');
-    var currentValue = display.value;
+// Récupère les éléments HTML
+var display = document.getElementById('display');
+var buttons = document.querySelectorAll('.keypad button');
 
-    // Vérifie si la dernière valeur ajoutée est une virgule
-    if (value === '.' && currentValue[currentValue.length - 1] === '.') {
-        return; // Empêche l'ajout d'une deuxième virgule consécutive
+// Ajoute un gestionnaire d'événement aux boutons
+buttons.forEach(function(button) {
+  button.addEventListener('click', function() {
+    var value = this.textContent;
+
+    if (value === '=') {
+      calculateResult();
+    } else if (value === 'C') {
+      clearDisplay();
+    } else {
+      appendToDisplay(value);
     }
+  });
+});
 
-    // Ajoute la valeur au contenu de l'affichage
-    display.value += value;
+function appendToDisplay(value) {
+  // Vérifie si la dernière saisie est une virgule
+  var lastChar = display.value.slice(-1);
+  if (lastChar === ',') {
+    // Vérifie si la valeur actuelle est également une virgule
+    if (value === ',') {
+      return; // Empêche d'ajouter une virgule supplémentaire
+    }
+  }
+
+  display.value += value;
 }
 
-
 function clearDisplay() {
-    // Efface le contenu de l'affichage
-    document.getElementById('display').value = '0';
+  display.value = '';
 }
 
 function calculateResult() {
-    // Récupère la valeur affichée dans l'affichage
-    var displayValue = document.getElementById('display').value;
-    // Évalue l'expression et obtient le résultat
-    var result = evaluateExpression(displayValue);
-    // Affiche le résultat dans l'affichage
-    document.getElementById('display').value = result;
+  var expression = display.value;
+
+  try {
+    if (hasMultipleCommas(expression)) {
+      throw new Error('Nombre invalide');
+    }
+
+    var result = evaluateExpression(expression);
+    display.value = result;
+  } catch (error) {
+    display.value = 'Erreur';
+  }
 }
 
 function evaluateExpression(expression) {
-    // Tableau des opérateurs supportés
-    var operators = ['+', '-', '*', '/'];
-    // Sépare l'expression en valeurs (opérandes et opérateurs)
-    var values = expression.split(' ');
-    // Pile pour les opérandes
-    var operandStack = [];
-    // Pile pour les opérateurs
-    var operatorStack = [];
+  var operators = ['+', '-', '*', '/'];
+  var numbers = expression.split(new RegExp('[' + operators.join('') + ']'));
 
-    // Parcours des valeurs de l'expression
-    for (var i = 0; i < values.length; i++) {
-        var currentValue = values[i];
+  // Vérifie si l'expression contient au moins un opérateur
+  if (numbers.length < 2) {
+    throw new Error('Expression invalide');
+  }
 
-        if (operators.includes(currentValue)) {
-            // Si c'est un opérateur, on effectue les calculs en respectant la précédence des opérateurs
-            while (operatorStack.length > 0 && hasPrecedence(operatorStack[operatorStack.length - 1], currentValue)) {
-                var operator = operatorStack.pop();
-                var operand2 = operandStack.pop();
-                var operand1 = operandStack.pop();
-                var result = calculate(operator, operand1, operand2);
-                operandStack.push(result);
-            }
-            operatorStack.push(currentValue);
-        } else {
-            // Si c'est un opérande, on l'ajoute à la pile des opérandes
-            operandStack.push(parseFloat(currentValue));
-        }
+  var operands = numbers.map(function(num) {
+    return parseFloat(num);
+  });
+
+  var operatorIndex = 0;
+  var result = operands[0];
+
+  for (var i = 1; i < operands.length; i++) {
+    var operator = expression[operatorIndex + numbers[i - 1].length];
+    var operand = operands[i];
+
+    if (isNaN(operand)) {
+      throw new Error('Nombre invalide');
     }
 
-    // Effectue les calculs restants avec les opérateurs et opérandes restants
-    while (operatorStack.length > 0) {
-        var operator = operatorStack.pop();
-        var operand2 = operandStack.pop();
-        var operand1 = operandStack.pop();
-        var result = calculate(operator, operand1, operand2);
-        operandStack.push(result);
+    if (operator === '+') {
+      result += operand;
+    } else if (operator === '-') {
+      result -= operand;
+    } else if (operator === '*') {
+      result *= operand;
+    } else if (operator === '/') {
+      result /= operand;
     }
 
-    // Le résultat final est le seul élément restant dans la pile des opérandes
-    return operandStack[0];
+    operatorIndex += numbers[i - 1].length + 1;
+  }
+
+  return result;
 }
 
-function calculate(operator, operand1, operand2) {
-    // Effectue le calcul en fonction de l'opérateur
-    switch (operator) {
-        case '+':
-            return operand1 + operand2;
-        case '-':
-            return operand1 - operand2;
-        case '*':
-            return operand1 * operand2;
-        case '/':
-            if (operand2 === 0) {
-                return 'Erreur : Division par zéro';
-            }
-            return operand1 / operand2;
-        default:
-            return 0;
-    }
-}
-
-function hasPrecedence(operator1, operator2) {
-    // Vérifie si l'opérateur1 a une précédence plus élevée que l'opérateur2
-    if ((operator1 === '*' || operator1 === '/') && (operator2 === '+' || operator2 === '-')) {
-        return true;
-    }
-    return false;
+function hasMultipleCommas(expression) {
+  // Vérifie si l'expression contient plusieurs virgules consécutives
+  return /,\s*,/.test(expression);
 }
