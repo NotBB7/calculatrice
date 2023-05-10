@@ -1,7 +1,16 @@
 function appendToDisplay(value) {
+    var display = document.getElementById('display');
+    var currentValue = display.value;
+
+    // Vérifie si la dernière valeur ajoutée est une virgule
+    if (value === '.' && currentValue[currentValue.length - 1] === '.') {
+        return; // Empêche l'ajout d'une deuxième virgule consécutive
+    }
+
     // Ajoute la valeur au contenu de l'affichage
-    document.getElementById('display').value += value;
+    display.value += value;
 }
+
 
 function clearDisplay() {
     // Efface le contenu de l'affichage
