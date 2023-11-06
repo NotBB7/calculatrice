@@ -1,3 +1,4 @@
 # calculatrice
 
-![image](https://github.com/NotBB7/calculatrice/assets/64654899/c84de4aa-f347-419e-8890-3200819695f5)
+![image](https://github.com/NotBB7/calculatrice/assets/64654899/b042a831-442f-4b3c-ae35-7a46af1eabb4)
+
