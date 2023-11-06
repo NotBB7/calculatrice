@@ -1,82 +1,115 @@
-.calculator {
-    width: 300px;
-    margin: 0 auto;
-    background-color: #f1f1f1;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  }
-  
-  #display {
-    width: 100%;
-    height: 40px;
-    font-size: 18px;
-    text-align: right;
-    margin-bottom: 10px;
-    padding: 5px;
-    box-sizing: border-box;
-    border: none;
-    border-radius: 3px;
-    background-color: #fff;
-  }
-  
-  .keypad {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 5px;
-  }
-  
-  button {
-    width: 100%;
-    height: 60px;
-    font-size: 20px;
-    border: none;
-    border-radius: 3px;
-    background-color: #e0e0e0;
-    color: #333;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .operator {
-    background-color: #f39c12;
-    color: #fff;
-  }
-  
-  .clear {
-    background-color: #c0392b;
-    color: #fff;
-  }
-  
-  .equals {
-    background-color: #27ae60;
-    color: #fff;
-    grid-column: span 2;
-  }
-  
-  .decimal {
-    background-color: #f39c12;
-    color: #fff;
-  }
-  
-  button:hover {
-    background-color: #ccc;
-  }
+body {
+  margin: 0 auto; /* Centre le contenu horizontalement */
+  /*overflow: hidden; */ /* Commenté (peut être utilisé pour masquer le débordement du contenu) */
+  background-color: #eeeeee; /* Couleur d'arrière-plan de la page */
+}
 
-/* Media queries pour la rendre responsive */
+h1 {
+  text-align: center; /* Centre le texte horizontalement */
+  font-family: 'Oswald', sans-serif; /* Police de caractères */
+  color: rgba(0, 0, 0, 0.6); /* Couleur du texte avec une transparence */
+  font-size: 50px; /* Taille de la police */
+  font-style: italic; /* Style de police italique */
+}
 
-@media screen and (max-width: 600px) {
-    .calculator {
-      width: 100%;
-    }
-  
-    .keypad button {
-      width: 100%;
-      height: 60px;
-      font-size: 26px;
-    }
-  
-    .keypad button:last-child {
-      grid-column: 1 / span 4;
-    }
-  }
+.wrapper {
+  max-width: 1000px; /* Largeur maximale du conteneur */
+  margin: 0 auto; /* Centre le conteneur horizontalement */
+  display: flex; /* Utilise l'affichage flexible */
+  display: -webkit-flex; /* Affichage flexible pour Safari */
+  flex-direction: column; /* Aligne les éléments en colonne */
+}
+
+.calculatrice {
+  display: flex; /* Utilise l'affichage flexible */
+  display: -webkit-flex; /* Affichage flexible pour Safari */
+  flex-direction: column; /* Aligne les éléments en colonne */
+  margin: 0 auto; /* Centre la calculatrice horizontalement */
+}
+
+.bodycalc {
+  display: flex; /* Utilise l'affichage flexible */
+  display: -webkit-flex; /* Affichage flexible pour Safari */
+  justify-content: center; /* Centre les éléments horizontalement */
+}
+
+.btnumbers {
+  list-style: none; /* Supprime les puces de liste */
+  display: flex; /* Utilise l'affichage flexible */
+  max-width: 330px; /* Largeur maximale */
+  flex-wrap: wrap; /* Permet l'enroulement des éléments */
+  max-height: 450px; /* Hauteur maximale */
+  padding: 0; /* Supprime le rembourrage */
+}
+
+.btoperations {
+  list-style: none; /* Supprime les puces de liste */
+  display: flex; /* Utilise l'affichage flexible */
+  flex-direction: column; /* Aligne les éléments en colonne */
+  padding: 0; /* Supprime le rembourrage */
+}
+
+li {
+  background: rgba(0, 0, 0, 0.1); /* Couleur de fond avec transparence */
+  padding: 45px; /* Rembourrage */
+  margin: 3px; /* Marge extérieure */
+  width: 10px; /* Largeur */
+  height: 18px; /* Hauteur */
+  font-size: 18px; /* Taille de la police */
+  font-family: 'Oswald', sans-serif; /* Police de caractères */
+  color: rgba(0, 0, 0, 0.7); /* Couleur du texte avec transparence */
+  cursor: pointer; /* Curseur de souris au survol */
+}
+
+li:hover {
+  box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2); /* Ombre portée au survol */
+}
+
+.specop {
+  background: rgba(0, 0, 0, 0.6); /* Couleur de fond avec transparence */
+  margin: 3px; /* Marge extérieure */
+  padding: 26px 50px; /* Rembourrage */
+  color: #fff; /* Couleur du texte */
+  text-align: center; /* Centre le texte horizontalement */
+  width: 15px; /* Largeur */
+}
+
+.specop:first-child {
+  background: rgba(255, 0, 0, 0.7); /* Couleur de fond du premier élément */
+}
+
+.screen {
+  width: 450px; /* Largeur */
+  height: 60px; /* Hauteur */
+  background: rgba(0, 0, 0, 0.7); /* Couleur de fond avec transparence */
+  margin: 0 auto; /* Centre l'écran horizontalement */
+  display: flex; /* Utilise l'affichage flexible */
+  flex-direction: column; /* Aligne les éléments en colonne */
+}
+
+.input, .output {
+  width: 440px; /* Largeur */
+  margin-top: 2px; /* Marge supérieure */
+  color: rgba(255, 255, 255, 0.7); /* Couleur du texte avec transparence */
+  text-align: right; /* Alignement du texte à droite */
+  overflow: hidden; /* Masque le débordement du contenu */
+}
+
+.input {
+  height: 35px; /* Hauteur de la zone d'entrée */
+  font-size: 30px; /* Taille de la police pour l'entrée */
+}
+
+.output {
+  height: 16px; /* Hauteur de la zone de sortie */
+  font-size: 16px; /* Taille de la police pour la sortie */
+}
+
+.signature {
+  text-align: center; /* Centre le texte horizontalement */
+  margin-top: 25px; /* Marge supérieure */
+  font-size: 20px; /* Taille de la police */
+  font-family: 'Oswald', sans-serif; /* Police de caractères */
+  color: rgba(0, 0, 0, 0.7); /* Couleur du texte avec transparence */
+  font-style: italic; /* Style de police italique */
+}

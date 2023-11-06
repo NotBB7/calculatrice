@@ -1,38 +1,64 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <title>Calculatrice</title>
-</head>
-<body>
-    <div class="calculator">
-        <input type="text" id="display" readonly>
-        <div class="keypad">
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button class="operator">+</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button class="operator">-</button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button class="operator">*</button>
-          <button class="clear">C</button>
-          <button>0</button>
-          <button class="decimal">,</button>
-          <button class="operator">/</button>
-          <button class="equals" style="grid-column: span 4;">=</button>
-        </div>
-      </div>
-      
+<html lang="fr-FR">
 
-    <script src="assets/js/script.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <title>Projet calculette</title>
+        <link rel=stylesheet type="text/css" href="assets/css/style.css"/>
+    </head>
     
-</body>
+    <body>
+        <div class="wrapper">
+</br> <!-- Début du conteneur principal -->
+
+   <h1>calculatrice</h1> <!-- Titre de la calculatrice -->
+
+ <br> <!-- Saut de ligne -->
+
+   <div class="calculatrice">
+     <!-- Début de la calculatrice -->
+
+     <div class="screen">
+       <!-- Écran de la calculatrice -->
+       <span class="input">0</span> <!-- Affichage de l'entrée de l'utilisateur -->
+       <span class="output"></span> <!-- Affichage du résultat -->
+     </div>
+
+     <div class="bodycalc">
+       <!-- Corps de la calculatrice -->
+
+       <ul class="btnumbers">
+         <!-- Liste des boutons numériques -->
+         <li data-num="7" onclick="calcul(this);">7</li> <!-- Bouton "7" -->
+         <li data-num="8" onclick="calcul(this);">8</li> <!-- Bouton "8" -->
+         <li data-num="9" onclick="calcul(this);">9</li> <!-- Bouton "9" -->
+         <li data-num="4" onclick="calcul(this);">4</li> <!-- Bouton "4" -->
+         <li data-num="5" onclick="calcul(this);">5</li> <!-- Bouton "5" -->
+         <li data-num="6" onclick="calcul(this);">6</li> <!-- Bouton "6" -->
+         <li data-num="1" onclick="calcul(this);">1</li> <!-- Bouton "1" -->
+         <li data-num="2" onclick="calcul(this);">2</li> <!-- Bouton "2" -->
+         <li data-num="3" onclick="calcul(this);">3</li> <!-- Bouton "3" -->
+         <li data-num="0" onclick="calcul(this);">0</li> <!-- Bouton "0" -->
+         <li data-num="." onclick="calcul(this);">,</li> <!-- Bouton "," (point décimal) -->
+         <li data-num="ce" onclick="ce();">ce</li> <!-- Bouton "ce" (effacer un caractère) -->
+       </ul>
+
+       <ul class="btoperations">
+         <!-- Liste des boutons d'opérations -->
+         <li class="specop" onclick='res();'>AC</li> <!-- Bouton "AC" (effacer tout) -->
+         <li class="specop" data-num="+" onclick="calculate(this);">+</li> <!-- Bouton "+" (addition) -->
+         <li class="specop" data-num="-" onclick="calculate(this);">-</li> <!-- Bouton "-" (soustraction) -->
+         <li class="specop" data-num="/" onclick="calculate(this);">%</li> <!-- Bouton "/" (division) -->
+         <li class="specop" data-num="*" onclick="calculate(this);">x</li> <!-- Bouton "x" (multiplication) -->
+         <li class="specop"  onclick='end();'>=</li> <!-- Bouton "=" (égal) -->
+       </ul>
+
+     </div>
+   </div> <!-- Fin de la calculatrice -->
+
+   <span class="signature"> Fait par <a href='https://twitter.com/NotBBLoL' target="_blank" style="text-decoration:none; color:rgb(212, 82, 94);">NotBB</a></span>
+</div> <!-- Fin du conteneur principal -->
+
+    </body>
+	        <script src="assets/js/script.js"></script>
 </html>
